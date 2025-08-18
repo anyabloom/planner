@@ -12,6 +12,7 @@ interface Task {
   completed: boolean;
   priority: 'high' | 'medium' | 'low';
   dueDate?: string;
+  dueTime?: string;
   category?: string;
 }
 
@@ -24,6 +25,7 @@ const Index = () => {
       completed: false,
       priority: 'high',
       dueDate: '2024-01-20',
+      dueTime: '14:30',
       category: 'مطالعه'
     },
     {
@@ -33,6 +35,7 @@ const Index = () => {
       completed: true,
       priority: 'medium',
       dueDate: '2024-01-18',
+      dueTime: '07:00',
       category: 'سلامت'
     },
     {
@@ -42,6 +45,7 @@ const Index = () => {
       completed: false,
       priority: 'high',
       dueDate: '2024-01-19',
+      dueTime: '10:00',
       category: 'کار'
     }
   ]);

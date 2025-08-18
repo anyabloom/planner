@@ -12,6 +12,7 @@ interface Task {
   completed: boolean;
   priority: 'high' | 'medium' | 'low';
   dueDate?: string;
+  dueTime?: string;
   category?: string;
 }
 
@@ -24,12 +25,12 @@ interface TaskCardProps {
 export const TaskCard = ({ task, onToggle, onDelete }: TaskCardProps) => {
   const priorityColors = {
     high: 'destructive',
-    medium: 'secondary',
+    medium: 'tertiary',
     low: 'accent'
   };
 
   return (
-    <Card className="p-4 shadow-soft hover:shadow-medium transition-smooth border-0 gradient-card">
+    <Card className="p-4 shadow-soft hover:shadow-medium transition-smooth border-0 gradient-card animate-fade-in hover-scale">
       <div className="flex items-start gap-3 rtl">
         <Checkbox
           checked={task.completed}
@@ -58,6 +59,12 @@ export const TaskCard = ({ task, onToggle, onDelete }: TaskCardProps) => {
               <div className="flex items-center gap-1">
                 <Calendar className="w-3 h-3" />
                 <span>{task.dueDate}</span>
+                {task.dueTime && (
+                  <>
+                    <Clock className="w-3 h-3 mr-1" />
+                    <span>{task.dueTime}</span>
+                  </>
+                )}
               </div>
             )}
             {task.category && (

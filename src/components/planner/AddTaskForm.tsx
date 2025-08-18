@@ -13,6 +13,7 @@ interface AddTaskFormProps {
     description?: string;
     priority: 'high' | 'medium' | 'low';
     dueDate?: string;
+    dueTime?: string;
     category?: string;
   }) => void;
 }
@@ -23,6 +24,7 @@ export const AddTaskForm = ({ onAddTask }: AddTaskFormProps) => {
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<'high' | 'medium' | 'low'>('medium');
   const [dueDate, setDueDate] = useState("");
+  const [dueTime, setDueTime] = useState("");
   const [category, setCategory] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -34,6 +36,7 @@ export const AddTaskForm = ({ onAddTask }: AddTaskFormProps) => {
       description: description || undefined,
       priority,
       dueDate: dueDate || undefined,
+      dueTime: dueTime || undefined,
       category: category || undefined,
     });
 
@@ -42,6 +45,7 @@ export const AddTaskForm = ({ onAddTask }: AddTaskFormProps) => {
     setDescription("");
     setPriority('medium');
     setDueDate("");
+    setDueTime("");
     setCategory("");
     setIsOpen(false);
   };
@@ -123,15 +127,27 @@ export const AddTaskForm = ({ onAddTask }: AddTaskFormProps) => {
           </div>
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="category" className="persian-text">دسته‌بندی</Label>
-          <Input
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            placeholder="مثال: کار، شخصی، مطالعه..."
-            className="persian-text"
-          />
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="dueTime" className="persian-text">ساعت انجام</Label>
+            <Input
+              id="dueTime"
+              type="time"
+              value={dueTime}
+              onChange={(e) => setDueTime(e.target.value)}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="category" className="persian-text">دسته‌بندی</Label>
+            <Input
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="مثال: کار، شخصی، مطالعه..."
+              className="persian-text"
+            />
+          </div>
         </div>
 
         <div className="flex gap-2 pt-2">
