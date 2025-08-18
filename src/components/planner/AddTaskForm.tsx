@@ -1,0 +1,156 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { Plus, X } from "lucide-react";
+
+interface AddTaskFormProps {
+  onAddTask: (task: {
+    title: string;
+    description?: string;
+    priority: 'high' | 'medium' | 'low';
+    dueDate?: string;
+    category?: string;
+  }) => void;
+}
+
+export const AddTaskForm = ({ onAddTask }: AddTaskFormProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState<'high' | 'medium' | 'low'>('medium');
+  const [dueDate, setDueDate] = useState("");
+  const [category, setCategory] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!title.trim()) return;
+
+    onAddTask({
+      title,
+      description: description || undefined,
+      priority,
+      dueDate: dueDate || undefined,
+      category: category || undefined,
+    });
+
+    // Reset form
+    setTitle("");
+    setDescription("");
+    setPriority('medium');
+    setDueDate("");
+    setCategory("");
+    setIsOpen(false);
+  };
+
+  if (!isOpen) {
+    return (
+      <Button
+        onClick={() => setIsOpen(true)}
+        className="w-full gradient-primary text-white border-0 shadow-soft hover:shadow-medium transition-smooth"
+        size="lg"
+      >
+        <Plus className="w-5 h-5 ml-2" />
+        افزودن تسک جدید
+      </Button>
+    );
+  }
+
+  return (
+    <Card className="p-6 shadow-medium border-0 gradient-card">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-semibold persian-text">تسک جدید</h3>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => setIsOpen(false)}
+        >
+          <X className="w-4 h-4" />
+        </Button>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="title" className="persian-text">عنوان تسک</Label>
+          <Input
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="عنوان تسک را وارد کنید..."
+            className="persian-text"
+            required
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="description" className="persian-text">توضیحات (اختیاری)</Label>
+          <Textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="توضیحات اضافی..."
+            className="persian-text"
+            rows={3}
+          />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label className="persian-text">اولویت</Label>
+            <Select value={priority} onValueChange={(value: 'high' | 'medium' | 'low') => setPriority(value)}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="high">فوری</SelectItem>
+                <SelectItem value="medium">متوسط</SelectItem>
+                <SelectItem value="low">عادی</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="dueDate" className="persian-text">تاریخ انجام</Label>
+            <Input
+              id="dueDate"
+              type="date"
+              value={dueDate}
+              onChange={(e) => setDueDate(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="category" className="persian-text">دسته‌بندی</Label>
+          <Input
+            id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            placeholder="مثال: کار، شخصی، مطالعه..."
+            className="persian-text"
+          />
+        </div>
+
+        <div className="flex gap-2 pt-2">
+          <Button
+            type="submit"
+            className="flex-1 gradient-primary text-white border-0"
+          >
+            افزودن تسک
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setIsOpen(false)}
+            className="flex-1"
+          >
+            لغو
+          </Button>
+        </div>
+      </form>
+    </Card>
+  );
+};
