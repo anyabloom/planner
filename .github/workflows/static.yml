@@ -26,7 +26,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.https://preview--planner-daily.lovable.app/ }}
+      url: ${{ https://preview--planner-daily.lovable.app/ }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
