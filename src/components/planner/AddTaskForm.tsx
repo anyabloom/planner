@@ -23,7 +23,7 @@ export const AddTaskForm = ({ onAddTask }: AddTaskFormProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<'high' | 'medium' | 'low'>('medium');
-  const [dueDate, setDueDate] = useState("");
+  const [dueDate, setDueDate] = useState("")
   const [dueTime, setDueTime] = useState("");
   const [category, setCategory] = useState("");
 
