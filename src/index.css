@@ -7,36 +7,36 @@
 
 @layer base {
   :root {
-    /* Brand Colors - Pastel Pink Theme */
-    --background: 340 20% 98%;
-    --foreground: 340 10% 15%;
+    /* Brand Colors - Fresh Vibrant Theme */
+    --background: 340 25% 97%;
+    --foreground: 340 15% 20%;
 
     --card: 0 0% 100%;
-    --card-foreground: 340 10% 15%;
+    --card-foreground: 340 15% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 340 10% 15%;
+    --popover-foreground: 340 15% 20%;
 
-    /* Primary - Softer Pink */
-    --primary: 330 35% 85%;
-    --primary-foreground: 330 20% 20%;
-    --primary-light: 330 30% 92%;
-    --primary-glow: 330 25% 88%;
+    /* Primary - Vibrant Pink */
+    --primary: 330 65% 75%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 330 55% 85%;
+    --primary-glow: 330 60% 80%;
 
-    /* Secondary - Soft Lavender */
-    --secondary: 310 25% 88%;
-    --secondary-foreground: 310 20% 25%;
-    --secondary-light: 310 20% 95%;
+    /* Secondary - Bright Lavender */
+    --secondary: 310 55% 75%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 310 45% 88%;
 
-    /* Accent - Mint Green */
-    --accent: 140 40% 75%;
+    /* Accent - Fresh Mint Green */
+    --accent: 140 65% 65%;
     --accent-foreground: 0 0% 100%;
-    --accent-light: 140 40% 90%;
+    --accent-light: 140 55% 80%;
 
-    /* Tertiary - Peach */
-    --tertiary: 25 85% 80%;
+    /* Tertiary - Bright Peach */
+    --tertiary: 25 90% 70%;
     --tertiary-foreground: 0 0% 100%;
-    --tertiary-light: 25 85% 92%;
+    --tertiary-light: 25 80% 85%;
 
     --muted: 340 10% 96%;
     --muted-foreground: 340 10% 45%;
