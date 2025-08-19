@@ -79,8 +79,8 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="gradient-hero text-white">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex items-center gap-3 mb-2">
+        <div className="container mx-auto px-4 py-8 text-center">
+          <div className="flex items-center justify-center gap-3 mb-2">
             <Layout className="w-8 h-8" />
             <h1 className="text-3xl font-bold">my planner</h1>
           </div>
