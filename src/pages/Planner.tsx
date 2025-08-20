@@ -100,15 +100,30 @@ const Planner = () => {
   const getBackgroundClass = (bg: string) => {
     switch(bg) {
       case 'sunset': return 'bg-gradient-to-br from-orange-500 to-pink-500';
-      case 'ocean': return 'bg-gradient-to-br from-blue-500 to-cyan-500';
+      case 'ocean': return '';
       case 'forest': return 'bg-gradient-to-br from-green-500 to-emerald-500';
       case 'purple': return 'bg-gradient-to-br from-purple-500 to-indigo-500';
       default: return 'gradient-hero';
     }
   };
 
+  const getBackgroundStyle = (bg: string) => {
+    if (bg === 'ocean') {
+      return {
+        backgroundImage: `url(/lovable-uploads/e8dba7ff-7d4e-4f58-9c3c-e80c550879c7.png)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+    }
+    return {};
+  };
+
   return (
-    <div className={`min-h-screen ${getBackgroundClass(plannerSettings.background)}`}>
+    <div 
+      className={`min-h-screen ${getBackgroundClass(plannerSettings.background)}`}
+      style={getBackgroundStyle(plannerSettings.background)}
+    >
       {/* Header */}
       <div className="bg-black/20 text-white">
         <div className="container mx-auto px-4 py-8">

@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar, Layout, Palette, Target } from "lucide-react";
 
+
 const Landing = () => {
   const navigate = useNavigate();
   const [plannerName, setPlannerName] = useState("");
@@ -55,17 +56,29 @@ const Landing = () => {
   const getBackgroundClass = (bg: string) => {
     switch(bg) {
       case 'sunset': return 'bg-gradient-to-br from-orange-500 to-pink-500';
-      case 'ocean': return 'bg-gradient-to-br from-blue-500 to-cyan-500';
+      case 'ocean': return '';
       case 'forest': return 'bg-gradient-to-br from-green-500 to-emerald-500';
       case 'purple': return 'bg-gradient-to-br from-purple-500 to-indigo-500';
       default: return 'gradient-hero';
     }
   };
 
+  const getBackgroundStyle = (bg: string) => {
+    if (bg === 'ocean') {
+      return {
+        backgroundImage: `url(/lovable-uploads/e8dba7ff-7d4e-4f58-9c3c-e80c550879c7.png)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+    }
+    return {};
+  };
+
   const backgroundOptions = [
     { value: "default", label: "پیش‌فرض", gradient: "gradient-hero" },
     { value: "sunset", label: "غروب آفتاب", gradient: "bg-gradient-to-br from-orange-500 to-pink-500" },
-    { value: "ocean", label: "اقیانوس", gradient: "bg-gradient-to-br from-blue-500 to-cyan-500" },
+    { value: "ocean", label: "اقیانوس", gradient: "", isImage: true },
     { value: "forest", label: "جنگل", gradient: "bg-gradient-to-br from-green-500 to-emerald-500" },
     { value: "purple", label: "بنفش", gradient: "bg-gradient-to-br from-purple-500 to-indigo-500" }
   ];
@@ -165,7 +178,14 @@ const Landing = () => {
                           : "border-border hover:border-primary/50"
                       }`}
                     >
-                      <div className={`w-full h-12 rounded ${option.gradient} mb-2`}></div>
+                      <div 
+                        className={`w-full h-12 rounded mb-2 ${option.gradient}`}
+                        style={option.isImage ? {
+                          backgroundImage: `url(/lovable-uploads/e8dba7ff-7d4e-4f58-9c3c-e80c550879c7.png)`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center'
+                        } : {}}
+                      ></div>
                       <span className="text-sm persian-text">{option.label}</span>
                     </button>
                   ))}
