@@ -55,16 +55,16 @@ const Planner = () => {
   ]);
 
   useEffect(() => {
-    const settings = localStorage.getItem('plannerSettings');
-    if (settings) {
-      setPlannerSettings(JSON.parse(settings));
+    const planner = localStorage.getItem('currentPlanner');
+    if (planner) {
+      setPlannerSettings(JSON.parse(planner));
     } else {
       navigate('/');
     }
   }, [navigate]);
 
   const handleNewPlanner = () => {
-    localStorage.removeItem('plannerSettings');
+    localStorage.removeItem('currentPlanner');
     navigate('/');
   };
 
@@ -108,9 +108,9 @@ const Planner = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className={`min-h-screen ${getBackgroundClass(plannerSettings.background)}`}>
       {/* Header */}
-      <div className={`${getBackgroundClass(plannerSettings.background)} text-white`}>
+      <div className="bg-black/20 text-white">
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-between mb-4">
             <Button 
@@ -147,6 +147,7 @@ const Planner = () => {
       </div>
 
       <div className="container mx-auto px-4 py-8 space-y-8">
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 space-y-8">
         {/* Stats */}
         <PlannerStats 
           totalTasks={tasks.length}
@@ -191,12 +192,13 @@ const Planner = () => {
           <div className="space-y-6">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Calendar className="w-5 h-5 text-primary" />
-                <h2 className="text-xl font-semibold persian-text">تقویم</h2>
+                <Calendar className="w-5 h-5 text-white" />
+                <h2 className="text-xl font-semibold persian-text text-white">تقویم</h2>
               </div>
               <WeeklyCalendar />
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

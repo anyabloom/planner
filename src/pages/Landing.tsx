@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Layout, Palette, Target } from "lucide-react";
 
 const Landing = () => {
@@ -12,18 +11,55 @@ const Landing = () => {
   const [plannerName, setPlannerName] = useState("");
   const [background, setBackground] = useState("default");
   const [goalDate, setGoalDate] = useState("");
+  const [savedPlanners, setSavedPlanners] = useState<any[]>([]);
+
+  useEffect(() => {
+    const planners = localStorage.getItem('savedPlanners');
+    if (planners) {
+      setSavedPlanners(JSON.parse(planners));
+    }
+  }, []);
 
   const handleCreatePlanner = () => {
     if (!plannerName.trim()) return;
     
-    // Store planner settings in localStorage for now
-    localStorage.setItem('plannerSettings', JSON.stringify({
+    const newPlanner = {
+      id: Date.now().toString(),
       name: plannerName,
       background,
-      goalDate
-    }));
+      goalDate,
+      createdAt: new Date().toISOString()
+    };
+    
+    // Save to saved planners list
+    const updatedPlanners = [...savedPlanners, newPlanner];
+    localStorage.setItem('savedPlanners', JSON.stringify(updatedPlanners));
+    
+    // Set as current planner
+    localStorage.setItem('currentPlanner', JSON.stringify(newPlanner));
     
     navigate('/planner');
+  };
+
+  const handleSelectPlanner = (planner: any) => {
+    localStorage.setItem('currentPlanner', JSON.stringify(planner));
+    navigate('/planner');
+  };
+
+  const handleDeletePlanner = (plannerId: string) => {
+    const updatedPlanners = savedPlanners.filter(p => p.id !== plannerId);
+    setSavedPlanners(updatedPlanners);
+    localStorage.setItem('savedPlanners', JSON.stringify(updatedPlanners));
+  };
+
+  const getBackgroundClass = (bg: string) => {
+    switch(bg) {
+      case 'sunset': return 'bg-gradient-to-br from-orange-500 to-pink-500';
+      case 'ocean': return 'bg-gradient-to-br from-blue-500 to-cyan-500';
+      case 'forest': return 'bg-gradient-to-br from-green-500 to-emerald-500';
+      case 'purple': return 'bg-gradient-to-br from-purple-500 to-indigo-500';
+      default: return 'gradient-hero';
+    }
   };
 
   const backgroundOptions = [
@@ -36,7 +72,7 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl space-y-8">
+      <div className="w-full max-w-4xl space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-3">
@@ -48,81 +84,122 @@ const Landing = () => {
           </p>
         </div>
 
-        {/* Create Planner Form */}
-        <Card className="border-2">
-          <CardHeader className="text-center">
-            <CardTitle className="persian-text flex items-center justify-center gap-2">
-              <Target className="w-5 h-5" />
-              ایجاد برنامه‌ریز جدید
-            </CardTitle>
-            <CardDescription className="persian-text">
-              برنامه‌ریز خود را شخصی‌سازی کنید
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            {/* Planner Name */}
-            <div className="space-y-2">
-              <Label htmlFor="plannerName" className="persian-text">نام برنامه‌ریز</Label>
-              <Input
-                id="plannerName"
-                placeholder="مثال: برنامه‌ریز کاری من"
-                value={plannerName}
-                onChange={(e) => setPlannerName(e.target.value)}
-                className="text-right"
-              />
-            </div>
-
-            {/* Background Selection */}
-            <div className="space-y-3">
-              <Label className="persian-text flex items-center gap-2">
-                <Palette className="w-4 h-4" />
-                انتخاب پس‌زمینه
-              </Label>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {backgroundOptions.map((option) => (
-                  <button
-                    key={option.value}
-                    onClick={() => setBackground(option.value)}
-                    className={`relative p-4 rounded-lg border-2 transition-all ${
-                      background === option.value 
-                        ? "border-primary ring-2 ring-primary/20" 
-                        : "border-border hover:border-primary/50"
-                    }`}
-                  >
-                    <div className={`w-full h-12 rounded ${option.gradient} mb-2`}></div>
-                    <span className="text-sm persian-text">{option.label}</span>
-                  </button>
+        <div className="grid lg:grid-cols-2 gap-8">
+          {/* Saved Planners */}
+          {savedPlanners.length > 0 && (
+            <Card className="border-2">
+              <CardHeader>
+                <CardTitle className="persian-text flex items-center gap-2">
+                  <Layout className="w-5 h-5" />
+                  برنامه‌ریزهای من
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {savedPlanners.map((planner) => (
+                  <div key={planner.id} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-8 h-8 rounded ${getBackgroundClass(planner.background)}`}></div>
+                      <div>
+                        <h3 className="font-medium">{planner.name}</h3>
+                        <p className="text-xs text-muted-foreground persian-text">
+                          ایجاد شده: {new Date(planner.createdAt).toLocaleDateString('fa-IR')}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button size="sm" onClick={() => handleSelectPlanner(planner)}>
+                        انتخاب
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        onClick={() => handleDeletePlanner(planner.id)}
+                      >
+                        حذف
+                      </Button>
+                    </div>
+                  </div>
                 ))}
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Create New Planner Form */}
+          <Card className="border-2">
+            <CardHeader className="text-center">
+              <CardTitle className="persian-text flex items-center justify-center gap-2">
+                <Target className="w-5 h-5" />
+                ایجاد برنامه‌ریز جدید
+              </CardTitle>
+              <CardDescription className="persian-text">
+                برنامه‌ریز خود را شخصی‌سازی کنید
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Planner Name */}
+              <div className="space-y-2">
+                <Label htmlFor="plannerName" className="persian-text">نام برنامه‌ریز</Label>
+                <Input
+                  id="plannerName"
+                  placeholder="مثال: برنامه‌ریز کاری من"
+                  value={plannerName}
+                  onChange={(e) => setPlannerName(e.target.value)}
+                  className="text-right"
+                />
               </div>
-            </div>
 
-            {/* Goal Date */}
-            <div className="space-y-2">
-              <Label htmlFor="goalDate" className="persian-text flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
-                تاریخ هدف (اختیاری)
-              </Label>
-              <Input
-                id="goalDate"
-                type="date"
-                value={goalDate}
-                onChange={(e) => setGoalDate(e.target.value)}
-              />
-              <p className="text-xs text-muted-foreground persian-text">
-                تاریخی که می‌خواهید تسک‌هایتان تا آن زمان تمام شود
-              </p>
-            </div>
+              {/* Background Selection */}
+              <div className="space-y-3">
+                <Label className="persian-text flex items-center gap-2">
+                  <Palette className="w-4 h-4" />
+                  انتخاب پس‌زمینه
+                </Label>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {backgroundOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      onClick={() => setBackground(option.value)}
+                      className={`relative p-4 rounded-lg border-2 transition-all ${
+                        background === option.value 
+                          ? "border-primary ring-2 ring-primary/20" 
+                          : "border-border hover:border-primary/50"
+                      }`}
+                    >
+                      <div className={`w-full h-12 rounded ${option.gradient} mb-2`}></div>
+                      <span className="text-sm persian-text">{option.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-            {/* Create Button */}
-            <Button 
-              onClick={handleCreatePlanner}
-              disabled={!plannerName.trim()}
-              className="w-full h-12 text-lg persian-text"
-            >
-              ایجاد برنامه‌ریز
-            </Button>
-          </CardContent>
-        </Card>
+              {/* Goal Date */}
+              <div className="space-y-2">
+                <Label htmlFor="goalDate" className="persian-text flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  تاریخ هدف (اختیاری)
+                </Label>
+                <Input
+                  id="goalDate"
+                  type="date"
+                  value={goalDate}
+                  onChange={(e) => setGoalDate(e.target.value)}
+                />
+                <p className="text-xs text-muted-foreground persian-text">
+                  تاریخی که می‌خواهید تسک‌هایتان تا آن زمان تمام شود
+                </p>
+              </div>
+
+              {/* Create Button */}
+              <Button 
+                onClick={handleCreatePlanner}
+                disabled={!plannerName.trim()}
+                className="w-full h-12 text-lg persian-text"
+              >
+                ایجاد برنامه‌ریز
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

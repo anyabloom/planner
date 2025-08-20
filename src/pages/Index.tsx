@@ -6,9 +6,9 @@ const Index = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user has planner settings
-    const plannerSettings = localStorage.getItem('plannerSettings');
-    if (plannerSettings) {
+    // Check if user has current planner
+    const currentPlanner = localStorage.getItem('currentPlanner');
+    if (currentPlanner) {
       navigate('/planner');
     }
   }, [navigate]);
