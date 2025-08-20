@@ -129,7 +129,7 @@ const Landing = () => {
             <CardHeader className="text-center">
               <CardTitle className="persian-text flex items-center justify-center gap-2">
                 <Target className="w-5 h-5" />
-                ایجاد برنامه‌ریز جدید
+                ایجاد برنامه‌ریزی جدید
               </CardTitle>
               <CardDescription className="persian-text">
                 برنامه‌ریز خود را شخصی‌سازی کنید
