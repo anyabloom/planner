@@ -167,7 +167,7 @@ const Landing = () => {
             <CardContent className="space-y-6">
               {/* Planner Name */}
               <div className="space-y-2">
-                <Label htmlFor="plannerName" className="persian-text">نام برنامه‌ریز</Label>
+                <Label htmlFor="plannerName" className="persian-text text-right">عنوان پلنر</Label>
                 <Input
                   id="plannerName"
                   placeholder="مثال: برنامه‌ریز کاری من"
