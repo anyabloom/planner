@@ -57,9 +57,9 @@ const Landing = () => {
     switch(bg) {
       case 'sunset': return 'bg-gradient-to-br from-orange-500 to-pink-500';
       case 'ocean': return '';
-      case 'forest': return 'bg-gradient-to-br from-green-500 to-emerald-500';
+      case 'forest': return '';
       case 'purple': return 'bg-gradient-to-br from-purple-500 to-indigo-500';
-      default: return 'gradient-hero';
+      default: return '';
     }
   };
 
@@ -72,14 +72,30 @@ const Landing = () => {
         backgroundRepeat: 'no-repeat'
       };
     }
+    if (bg === 'forest') {
+      return {
+        backgroundImage: `url(/lovable-uploads/46a7ea07-b1be-498a-a741-40c28059799d.png)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+    }
+    if (bg === 'default') {
+      return {
+        backgroundImage: `url(/lovable-uploads/90f83d7d-be32-482d-aee4-7d698f927edf.png)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+    }
     return {};
   };
 
   const backgroundOptions = [
-    { value: "default", label: "پیش‌فرض", gradient: "gradient-hero" },
+    { value: "default", label: "صورتی", gradient: "", isImage: true },
     { value: "sunset", label: "غروب آفتاب", gradient: "bg-gradient-to-br from-orange-500 to-pink-500" },
     { value: "ocean", label: "اقیانوس", gradient: "", isImage: true },
-    { value: "forest", label: "جنگل", gradient: "bg-gradient-to-br from-green-500 to-emerald-500" },
+    { value: "forest", label: "جنگل", gradient: "", isImage: true },
     { value: "purple", label: "بنفش", gradient: "bg-gradient-to-br from-purple-500 to-indigo-500" }
   ];
 
@@ -181,7 +197,13 @@ const Landing = () => {
                       <div 
                         className={`w-full h-12 rounded mb-2 ${option.gradient}`}
                         style={option.isImage ? {
-                          backgroundImage: `url(/lovable-uploads/e8dba7ff-7d4e-4f58-9c3c-e80c550879c7.png)`,
+                          backgroundImage: option.value === 'ocean' 
+                            ? `url(/lovable-uploads/e8dba7ff-7d4e-4f58-9c3c-e80c550879c7.png)`
+                            : option.value === 'forest'
+                            ? `url(/lovable-uploads/46a7ea07-b1be-498a-a741-40c28059799d.png)`
+                            : option.value === 'default'
+                            ? `url(/lovable-uploads/90f83d7d-be32-482d-aee4-7d698f927edf.png)`
+                            : '',
                           backgroundSize: 'cover',
                           backgroundPosition: 'center'
                         } : {}}

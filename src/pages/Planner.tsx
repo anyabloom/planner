@@ -101,9 +101,9 @@ const Planner = () => {
     switch(bg) {
       case 'sunset': return 'bg-gradient-to-br from-orange-500 to-pink-500';
       case 'ocean': return '';
-      case 'forest': return 'bg-gradient-to-br from-green-500 to-emerald-500';
+      case 'forest': return '';
       case 'purple': return 'bg-gradient-to-br from-purple-500 to-indigo-500';
-      default: return 'gradient-hero';
+      default: return '';
     }
   };
 
@@ -111,6 +111,22 @@ const Planner = () => {
     if (bg === 'ocean') {
       return {
         backgroundImage: `url(/lovable-uploads/e8dba7ff-7d4e-4f58-9c3c-e80c550879c7.png)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+    }
+    if (bg === 'forest') {
+      return {
+        backgroundImage: `url(/lovable-uploads/46a7ea07-b1be-498a-a741-40c28059799d.png)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+    }
+    if (bg === 'default') {
+      return {
+        backgroundImage: `url(/lovable-uploads/90f83d7d-be32-482d-aee4-7d698f927edf.png)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
