@@ -99,15 +99,22 @@ const Planner = () => {
 
   const getBackgroundClass = (bg: string) => {
     switch(bg) {
-      case 'sunset': return 'bg-gradient-to-br from-orange-500 to-pink-500';
+      case 'sunset': return '';
       case 'ocean': return '';
       case 'forest': return '';
-      case 'purple': return 'bg-gradient-to-br from-purple-500 to-indigo-500';
       default: return '';
     }
   };
 
   const getBackgroundStyle = (bg: string) => {
+    if (bg === 'sunset') {
+      return {
+        backgroundImage: `url(/sunset-background.png)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+    }
     if (bg === 'ocean') {
       return {
         backgroundImage: `url(/lovable-uploads/e8dba7ff-7d4e-4f58-9c3c-e80c550879c7.png)`,

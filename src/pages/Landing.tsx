@@ -55,15 +55,22 @@ const Landing = () => {
 
   const getBackgroundClass = (bg: string) => {
     switch(bg) {
-      case 'sunset': return 'bg-gradient-to-br from-orange-500 to-pink-500';
+      case 'sunset': return '';
       case 'ocean': return '';
       case 'forest': return '';
-      case 'purple': return 'bg-gradient-to-br from-purple-500 to-indigo-500';
       default: return '';
     }
   };
 
   const getBackgroundStyle = (bg: string) => {
+    if (bg === 'sunset') {
+      return {
+        backgroundImage: `url(/sunset-background.png)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+    }
     if (bg === 'ocean') {
       return {
         backgroundImage: `url(/lovable-uploads/e8dba7ff-7d4e-4f58-9c3c-e80c550879c7.png)`,
@@ -93,10 +100,9 @@ const Landing = () => {
 
   const backgroundOptions = [
     { value: "default", label: "صورتی", gradient: "", isImage: true },
-    { value: "sunset", label: "غروب آفتاب", gradient: "bg-gradient-to-br from-orange-500 to-pink-500" },
+    { value: "sunset", label: "غروب آفتاب", gradient: "", isImage: true },
     { value: "ocean", label: "اقیانوس", gradient: "", isImage: true },
-    { value: "forest", label: "جنگل", gradient: "", isImage: true },
-    { value: "purple", label: "بنفش", gradient: "bg-gradient-to-br from-purple-500 to-indigo-500" }
+    { value: "forest", label: "جنگل", gradient: "", isImage: true }
   ];
 
   return (
@@ -109,7 +115,7 @@ const Landing = () => {
             <h1 className="text-4xl font-bold">my planner</h1>
           </div>
           <p className="text-lg text-muted-foreground persian-text">
-            برنامه‌ریز شخصی خود را بسازید
+            پلنر شخصی خود را بسازید
           </p>
         </div>
 
@@ -156,13 +162,13 @@ const Landing = () => {
           {/* Create New Planner Form */}
           <Card className="border-2">
             <CardHeader className="text-center">
+              <CardDescription className="persian-text">
+                روزهاتو با برنامه ریزی مرتب کن
+              </CardDescription>
               <CardTitle className="persian-text flex items-center justify-center gap-2">
                 <Target className="w-5 h-5" />
                 ایجاد پلنر جدید
               </CardTitle>
-              <CardDescription className="persian-text">
-                روزهاتو با برنامه ریزی مرتب کن
-              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Planner Name */}
@@ -199,7 +205,9 @@ const Landing = () => {
                       <div 
                         className={`w-full h-12 rounded mb-2 ${option.gradient}`}
                         style={option.isImage ? {
-                          backgroundImage: option.value === 'ocean' 
+                          backgroundImage: option.value === 'sunset'
+                            ? `url(/sunset-background.png)`
+                            : option.value === 'ocean' 
                             ? `url(/lovable-uploads/e8dba7ff-7d4e-4f58-9c3c-e80c550879c7.png)`
                             : option.value === 'forest'
                             ? `url(/lovable-uploads/46a7ea07-b1be-498a-a741-40c28059799d.png)`
