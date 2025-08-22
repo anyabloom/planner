@@ -158,7 +158,7 @@ const Landing = () => {
             <CardHeader className="text-center">
               <CardTitle className="persian-text flex items-center justify-center gap-2">
                 <Target className="w-5 h-5" />
-                ایجاد برنامه‌ریزی جدید
+                ایجاد پلنر جدید
               </CardTitle>
               <CardDescription className="persian-text">
                 روزهاتو با برنامه ریزی مرتب کن
@@ -167,7 +167,9 @@ const Landing = () => {
             <CardContent className="space-y-6">
               {/* Planner Name */}
               <div className="space-y-2">
-                <Label htmlFor="plannerName" className="persian-text text-right">عنوان پلنر</Label>
+                <div className="flex justify-end">
+                  <Label htmlFor="plannerName" className="persian-text">عنوان پلنر</Label>
+                </div>
                 <Input
                   id="plannerName"
                   placeholder="مثال: برنامه‌ریز کاری من"
@@ -237,7 +239,7 @@ const Landing = () => {
                 disabled={!plannerName.trim()}
                 className="w-full h-12 text-lg persian-text"
               >
-                ایجاد برنامه‌ریز
+                ایجاد پلنر
               </Button>
             </CardContent>
           </Card>
