@@ -161,7 +161,7 @@ const Landing = () => {
                 ایجاد برنامه‌ریزی جدید
               </CardTitle>
               <CardDescription className="persian-text">
-                برنامه‌ریز خود را شخصی‌سازی کنید
+                روزهاتو با برنامه ریزی مرتب کن
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
