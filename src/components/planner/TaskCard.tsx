@@ -3,7 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Calendar } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Clock, Calendar, CheckCircle } from "lucide-react";
 
 interface Task {
   id: string;
@@ -14,19 +16,38 @@ interface Task {
   dueDate?: string;
   dueTime?: string;
   category?: string;
+  completedAt?: string;
+  completionTime?: string;
 }
 
 interface TaskCardProps {
   task: Task;
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
+  onUpdateCompletionTime: (id: string, completionTime: string) => void;
 }
 
-export const TaskCard = ({ task, onToggle, onDelete }: TaskCardProps) => {
+export const TaskCard = ({ task, onToggle, onDelete, onUpdateCompletionTime }: TaskCardProps) => {
+  const [showCompletionTime, setShowCompletionTime] = useState(false);
+  const [completionTime, setCompletionTime] = useState(task.completionTime || "");
   const priorityColors = {
     high: 'destructive',
     medium: 'tertiary',
     low: 'accent'
+  };
+
+  const handleToggle = () => {
+    if (!task.completed) {
+      setShowCompletionTime(true);
+    } else {
+      onToggle(task.id);
+    }
+  };
+
+  const handleSaveCompletionTime = () => {
+    onUpdateCompletionTime(task.id, completionTime);
+    onToggle(task.id);
+    setShowCompletionTime(false);
   };
 
   return (
@@ -34,7 +55,7 @@ export const TaskCard = ({ task, onToggle, onDelete }: TaskCardProps) => {
       <div className="flex items-start gap-3 rtl">
         <Checkbox
           checked={task.completed}
-          onCheckedChange={() => onToggle(task.id)}
+          onCheckedChange={handleToggle}
           className="mt-1"
         />
         
@@ -73,7 +94,43 @@ export const TaskCard = ({ task, onToggle, onDelete }: TaskCardProps) => {
                 <span className="persian-text">{task.category}</span>
               </div>
             )}
+            {task.completed && task.completionTime && (
+              <div className="flex items-center gap-1 text-green-600">
+                <CheckCircle className="w-3 h-3" />
+                <span>Completed at: {task.completionTime}</span>
+              </div>
+            )}
           </div>
+
+          {showCompletionTime && (
+            <div className="space-y-2 p-3 bg-muted rounded-lg">
+              <Label htmlFor="completionTime" className="text-sm">
+                What time did you finish this task?
+              </Label>
+              <div className="flex gap-2">
+                <Input
+                  id="completionTime"
+                  type="time"
+                  value={completionTime}
+                  onChange={(e) => setCompletionTime(e.target.value)}
+                  className="flex-1"
+                />
+                <Button size="sm" onClick={handleSaveCompletionTime}>
+                  Save
+                </Button>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={() => {
+                    onToggle(task.id);
+                    setShowCompletionTime(false);
+                  }}
+                >
+                  Skip
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
         
         <Button

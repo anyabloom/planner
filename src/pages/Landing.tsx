@@ -99,10 +99,10 @@ const Landing = () => {
   };
 
   const backgroundOptions = [
-    { value: "default", label: "صورتی", gradient: "", isImage: true },
-    { value: "sunset", label: "غروب آفتاب", gradient: "", isImage: true },
-    { value: "ocean", label: "اقیانوس", gradient: "", isImage: true },
-    { value: "forest", label: "جنگل", gradient: "", isImage: true }
+    { value: "default", label: "Default", gradient: "", isImage: true },
+    { value: "sunset", label: "Sunset", gradient: "", isImage: true },
+    { value: "ocean", label: "Ocean", gradient: "", isImage: true },
+    { value: "forest", label: "Forest", gradient: "", isImage: true }
   ];
 
   return (
@@ -114,8 +114,8 @@ const Landing = () => {
             <Layout className="w-12 h-12 text-primary" />
             <h1 className="text-4xl font-bold">my planner</h1>
           </div>
-          <p className="text-lg text-muted-foreground persian-text text-center">
-            پلنر شخصی خود را بسازید
+          <p className="text-lg text-muted-foreground text-center">
+            Create your personal planner
           </p>
         </div>
 
@@ -124,9 +124,9 @@ const Landing = () => {
           {savedPlanners.length > 0 && (
             <Card className="border-2">
               <CardHeader>
-                <CardTitle className="persian-text flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2">
                   <Layout className="w-5 h-5" />
-                  برنامه‌ریزهای من
+                  My Planners
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -136,21 +136,21 @@ const Landing = () => {
                       <div className={`w-8 h-8 rounded ${getBackgroundClass(planner.background)}`}></div>
                       <div>
                         <h3 className="font-medium">{planner.name}</h3>
-                        <p className="text-xs text-muted-foreground persian-text">
-                          ایجاد شده: {new Date(planner.createdAt).toLocaleDateString('fa-IR')}
+                        <p className="text-xs text-muted-foreground">
+                          Created: {new Date(planner.createdAt).toLocaleDateString()}
                         </p>
                       </div>
                     </div>
                     <div className="flex gap-2">
                       <Button size="sm" onClick={() => handleSelectPlanner(planner)}>
-                        انتخاب
+                        Select
                       </Button>
                       <Button 
                         size="sm" 
                         variant="outline" 
                         onClick={() => handleDeletePlanner(planner.id)}
                       >
-                        حذف
+                        Delete
                       </Button>
                     </div>
                   </div>
@@ -162,34 +162,31 @@ const Landing = () => {
           {/* Create New Planner Form */}
           <Card className="border-2">
             <CardHeader className="text-center">
-              <CardDescription className="persian-text">
-                روزهاتو با برنامه ریزی مرتب کن
+              <CardDescription>
+                Organize your days with planning
               </CardDescription>
-              <CardTitle className="persian-text flex items-center justify-center gap-2">
+              <CardTitle className="flex items-center justify-center gap-2">
                 <Target className="w-5 h-5" />
-                ایجاد پلنر جدید
+                Create New Planner
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Planner Name */}
               <div className="space-y-2">
-                <div className="flex justify-end">
-                  <Label htmlFor="plannerName" className="persian-text">عنوان پلنر</Label>
-                </div>
+                <Label htmlFor="plannerName">Planner Title</Label>
                 <Input
                   id="plannerName"
-                  placeholder="مثال: برنامه‌ریز کاری من"
+                  placeholder="Example: My Work Planner"
                   value={plannerName}
                   onChange={(e) => setPlannerName(e.target.value)}
-                  className="text-right"
                 />
               </div>
 
               {/* Background Selection */}
               <div className="space-y-3">
-                <Label className="persian-text flex items-center gap-2">
+                <Label className="flex items-center gap-2">
                   <Palette className="w-4 h-4" />
-                  انتخاب پس‌زمینه
+                  Choose Background
                 </Label>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {backgroundOptions.map((option) => (
@@ -218,7 +215,7 @@ const Landing = () => {
                           backgroundPosition: 'center'
                         } : {}}
                       ></div>
-                      <span className="text-sm persian-text">{option.label}</span>
+                      <span className="text-sm">{option.label}</span>
                     </button>
                   ))}
                 </div>
@@ -226,9 +223,9 @@ const Landing = () => {
 
               {/* Goal Date */}
               <div className="space-y-2">
-                <Label htmlFor="goalDate" className="persian-text flex items-center gap-2">
+                <Label htmlFor="goalDate" className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  تاریخ هدف (اختیاری)
+                  Goal Date (Optional)
                 </Label>
                 <Input
                   id="goalDate"
@@ -236,8 +233,8 @@ const Landing = () => {
                   value={goalDate}
                   onChange={(e) => setGoalDate(e.target.value)}
                 />
-                <p className="text-xs text-muted-foreground persian-text">
-                  تاریخی که می‌خواهید تسک‌هایتان تا آن زمان تمام شود
+                <p className="text-xs text-muted-foreground">
+                  The date you want your tasks to be completed by
                 </p>
               </div>
 
@@ -245,9 +242,9 @@ const Landing = () => {
               <Button 
                 onClick={handleCreatePlanner}
                 disabled={!plannerName.trim()}
-                className="w-full h-12 text-lg persian-text"
+                className="w-full h-12 text-lg"
               >
-                ایجاد پلنر
+                Create Planner
               </Button>
             </CardContent>
           </Card>

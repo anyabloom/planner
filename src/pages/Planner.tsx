@@ -16,6 +16,8 @@ interface Task {
   dueDate?: string;
   dueTime?: string;
   category?: string;
+  completedAt?: string;
+  completionTime?: string;
 }
 
 const Planner = () => {
@@ -85,6 +87,16 @@ const Planner = () => {
 
   const deleteTask = (id: string) => {
     setTasks(tasks.filter(task => task.id !== id));
+  };
+
+  const updateCompletionTime = (id: string, completionTime: string) => {
+    setTasks(tasks.map(task => 
+      task.id === id ? { 
+        ...task, 
+        completionTime,
+        completedAt: new Date().toISOString()
+      } : task
+    ));
   };
 
   const completedTasks = tasks.filter(task => task.completed).length;
@@ -219,6 +231,7 @@ const Planner = () => {
                       task={task}
                       onToggle={toggleTask}
                       onDelete={deleteTask}
+                      onUpdateCompletionTime={updateCompletionTime}
                     />
                   ))}
                 </div>
