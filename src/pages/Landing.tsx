@@ -114,7 +114,7 @@ const Landing = () => {
             <Layout className="w-12 h-12 text-primary" />
             <h1 className="text-4xl font-bold">my planner</h1>
           </div>
-          <p className="text-lg text-muted-foreground persian-text">
+          <p className="text-lg text-muted-foreground persian-text text-center">
             پلنر شخصی خود را بسازید
           </p>
         </div>
