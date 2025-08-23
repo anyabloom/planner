@@ -54,7 +54,7 @@ export const AddTaskForm = ({ onAddTask }: AddTaskFormProps) => {
     return (
       <Button
         onClick={() => setIsOpen(true)}
-        className="w-full gradient-primary text-white border-0 shadow-soft hover:shadow-medium transition-smooth"
+        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground border-0 shadow-soft hover:shadow-medium transition-smooth"
         size="lg"
       >
         <Plus className="w-5 h-5 ml-2" />
@@ -64,13 +64,14 @@ export const AddTaskForm = ({ onAddTask }: AddTaskFormProps) => {
   }
 
   return (
-    <Card className="p-6 shadow-medium border-0 gradient-card">
+    <Card className="p-6 shadow-medium border-0 bg-card/95 backdrop-blur-sm">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold persian-text">تسک جدید</h3>
+        <h3 className="text-lg font-semibold persian-text text-foreground">تسک جدید</h3>
         <Button
           variant="ghost"
           size="sm"
           onClick={() => setIsOpen(false)}
+          className="text-muted-foreground hover:text-foreground hover:bg-muted"
         >
           <X className="w-4 h-4" />
         </Button>
@@ -78,32 +79,32 @@ export const AddTaskForm = ({ onAddTask }: AddTaskFormProps) => {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="title" className="persian-text">عنوان تسک</Label>
+          <Label htmlFor="title" className="persian-text text-foreground">عنوان تسک</Label>
           <Input
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="عنوان تسک را وارد کنید..."
-            className="persian-text"
+            className="persian-text bg-background border-border focus:border-primary focus:ring-primary/20"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="description" className="persian-text">توضیحات (اختیاری)</Label>
+          <Label htmlFor="description" className="persian-text text-foreground">توضیحات (اختیاری)</Label>
           <Textarea
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="توضیحات اضافی..."
-            className="persian-text"
+            className="persian-text bg-background border-border focus:border-primary focus:ring-primary/20"
             rows={3}
           />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label className="persian-text">اولویت</Label>
+            <Label className="persian-text text-foreground">اولویت</Label>
             <Select value={priority} onValueChange={(value: 'high' | 'medium' | 'low') => setPriority(value)}>
               <SelectTrigger>
                 <SelectValue />
@@ -117,35 +118,37 @@ export const AddTaskForm = ({ onAddTask }: AddTaskFormProps) => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="dueDate" className="persian-text">تاریخ انجام</Label>
+            <Label htmlFor="dueDate" className="persian-text text-foreground">تاریخ انجام</Label>
             <Input
               id="dueDate"
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
+              className="bg-background border-border focus:border-primary focus:ring-primary/20"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="dueTime" className="persian-text">ساعت انجام</Label>
+            <Label htmlFor="dueTime" className="persian-text text-foreground">ساعت انجام</Label>
             <Input
               id="dueTime"
               type="time"
               value={dueTime}
               onChange={(e) => setDueTime(e.target.value)}
+              className="bg-background border-border focus:border-primary focus:ring-primary/20"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="category" className="persian-text">دسته‌بندی</Label>
+            <Label htmlFor="category" className="persian-text text-foreground">دسته‌بندی</Label>
             <Input
               id="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               placeholder="مثال: کار، شخصی، مطالعه..."
-              className="persian-text"
+              className="persian-text bg-background border-border focus:border-primary focus:ring-primary/20"
             />
           </div>
         </div>
@@ -153,7 +156,7 @@ export const AddTaskForm = ({ onAddTask }: AddTaskFormProps) => {
         <div className="flex gap-2 pt-2">
           <Button
             type="submit"
-            className="flex-1 gradient-primary text-white border-0"
+            className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground border-0 shadow-soft hover:shadow-medium"
           >
             افزودن تسک
           </Button>
@@ -161,7 +164,7 @@ export const AddTaskForm = ({ onAddTask }: AddTaskFormProps) => {
             type="button"
             variant="outline"
             onClick={() => setIsOpen(false)}
-            className="flex-1"
+            className="flex-1 border-border hover:bg-muted hover:text-foreground"
           >
             لغو
           </Button>
