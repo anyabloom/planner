@@ -106,7 +106,7 @@ const Landing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className={`min-h-screen bg-background flex items-center justify-center p-4 theme-${background}`}>
       <div className="w-full max-w-4xl space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">

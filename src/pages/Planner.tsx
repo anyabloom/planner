@@ -156,7 +156,7 @@ const Planner = () => {
 
   return (
     <div 
-      className={`min-h-screen ${getBackgroundClass(plannerSettings.background)}`}
+      className={`min-h-screen theme-${plannerSettings.background} ${getBackgroundClass(plannerSettings.background)}`}
       style={getBackgroundStyle(plannerSettings.background)}
     >
       {/* Header */}

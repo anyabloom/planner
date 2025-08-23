@@ -85,6 +85,95 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
+  /* Ocean Theme - Blue Colors */
+  .theme-ocean {
+    --primary: 200 70% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 200 60% 75%;
+    --primary-glow: 200 65% 70%;
+
+    --secondary: 220 60% 65%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 220 50% 80%;
+
+    --accent: 180 55% 55%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 180 45% 70%;
+
+    --tertiary: 190 65% 65%;
+    --tertiary-foreground: 0 0% 100%;
+    --tertiary-light: 190 55% 80%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--primary)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(200 20% 98%));
+    --shadow-soft: 0 2px 15px -3px hsl(var(--primary) / 0.12);
+    --shadow-medium: 0 8px 25px -5px hsl(var(--primary) / 0.18);
+    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.3);
+  }
+
+  /* Sunset Theme - Warm Orange/Pink Colors */
+  .theme-sunset {
+    --primary: 20 80% 65%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 20 70% 80%;
+    --primary-glow: 20 75% 75%;
+
+    --secondary: 340 70% 70%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 340 60% 85%;
+
+    --accent: 45 85% 65%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 45 75% 80%;
+
+    --tertiary: 15 90% 70%;
+    --tertiary-foreground: 0 0% 100%;
+    --tertiary-light: 15 80% 85%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--primary)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(20 20% 98%));
+    --shadow-soft: 0 2px 15px -3px hsl(var(--primary) / 0.12);
+    --shadow-medium: 0 8px 25px -5px hsl(var(--primary) / 0.18);
+    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.3);
+  }
+
+  /* Forest Theme - Green Colors */
+  .theme-forest {
+    --primary: 140 65% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 140 55% 70%;
+    --primary-glow: 140 60% 65%;
+
+    --secondary: 120 60% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 120 50% 75%;
+
+    --accent: 100 70% 60%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 100 60% 75%;
+
+    --tertiary: 80 75% 65%;
+    --tertiary-foreground: 0 0% 100%;
+    --tertiary-light: 80 65% 80%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--primary)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(140 20% 98%));
+    --shadow-soft: 0 2px 15px -3px hsl(var(--primary) / 0.12);
+    --shadow-medium: 0 8px 25px -5px hsl(var(--primary) / 0.18);
+    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.3);
+  }
+
+  /* Default Theme remains as is */
+  .theme-default {
+    /* Keeps the original pink theme */
+  }
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
