@@ -109,7 +109,7 @@ const Planner = () => {
   const getBackgroundStyle = (bg: string) => {
     if (bg === 'sunset') {
       return {
-        backgroundImage: `url(/sunset-background.png)`,
+        backgroundImage: `url(/lovable-uploads/a1f4d81b-12e9-4120-a0a2-df45a66c2506.png)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'

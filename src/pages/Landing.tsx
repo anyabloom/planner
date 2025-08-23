@@ -65,7 +65,7 @@ const Landing = () => {
   const getBackgroundStyle = (bg: string) => {
     if (bg === 'sunset') {
       return {
-        backgroundImage: `url(/sunset-background.png)`,
+        backgroundImage: `url(/lovable-uploads/a1f4d81b-12e9-4120-a0a2-df45a66c2506.png)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
@@ -206,7 +206,7 @@ const Landing = () => {
                         className={`w-full h-12 rounded mb-2 ${option.gradient}`}
                         style={option.isImage ? {
                           backgroundImage: option.value === 'sunset'
-                            ? `url(/sunset-background.png)`
+                            ? `url(/lovable-uploads/a1f4d81b-12e9-4120-a0a2-df45a66c2506.png)`
                             : option.value === 'ocean' 
                             ? `url(/lovable-uploads/e8dba7ff-7d4e-4f58-9c3c-e80c550879c7.png)`
                             : option.value === 'forest'
